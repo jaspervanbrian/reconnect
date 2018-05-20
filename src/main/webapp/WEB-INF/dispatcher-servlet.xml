@@ -21,6 +21,9 @@
 	<context:property-placeholder location="classpath:application.properties" />
 
 	<mvc:annotation-driven />
+        
+        <!-- Static files (css, js, img, fonts) files located -->
+        <mvc:resources mapping="/resources/**" location="/resources/" />
 	
 	<!-- View Resolver -->
 	<bean
