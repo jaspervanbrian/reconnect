@@ -9,13 +9,12 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
 import static javax.persistence.CascadeType.ALL;
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import static javax.persistence.FetchType.EAGER;
 import static javax.persistence.FetchType.LAZY;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
@@ -26,16 +25,22 @@ import org.hibernate.annotations.UpdateTimestamp;
  * @author Dell
  */
 @Entity
-@Table(name = "posts")
-public class Post implements Serializable {
+@Table(name = "users")
+public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    private String first_name;
+    private String last_name;
     
-    private String title;
-    private String body;
+    @Column(unique = true)
+    private String username;
+    
+    @Column(unique = true)
+    private String email_address;
     
     @CreationTimestamp
     private Timestamp created_at;
@@ -43,8 +48,8 @@ public class Post implements Serializable {
     @UpdateTimestamp
     private Timestamp updated_at;
     
-    @ManyToOne(fetch = EAGER)
-    private User user;
+    @OneToMany(fetch = LAZY, cascade = ALL)
+    private List<Post> posts;
     
     @OneToMany(fetch = LAZY, cascade = ALL)
     private List<Comment> comments;
@@ -57,20 +62,36 @@ public class Post implements Serializable {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getFirst_name() {
+        return first_name;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setFirst_name(String first_name) {
+        this.first_name = first_name;
     }
 
-    public String getBody() {
-        return body;
+    public String getLast_name() {
+        return last_name;
     }
 
-    public void setBody(String body) {
-        this.body = body;
+    public void setLast_name(String last_name) {
+        this.last_name = last_name;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getEmail_address() {
+        return email_address;
+    }
+
+    public void setEmail_address(String email_address) {
+        this.email_address = email_address;
     }
 
     public Timestamp getCreated_at() {
@@ -89,12 +110,12 @@ public class Post implements Serializable {
         this.updated_at = updated_at;
     }
 
-    public User getUser() {
-        return user;
+    public List<Post> getPosts() {
+        return posts;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
     }
 
     public List<Comment> getComments() {
@@ -115,10 +136,10 @@ public class Post implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Post)) {
+        if (!(object instanceof User)) {
             return false;
         }
-        Post other = (Post) object;
+        User other = (User) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -127,7 +148,7 @@ public class Post implements Serializable {
 
     @Override
     public String toString() {
-        return "com.reconnect.model.Post[ id=" + id + " ]";
+        return "com.reconnect.model.User[ id=" + id + " ]";
     }
     
 }

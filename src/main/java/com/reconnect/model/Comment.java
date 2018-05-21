@@ -7,16 +7,12 @@ package com.reconnect.model;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.List;
-import static javax.persistence.CascadeType.ALL;
 import javax.persistence.Entity;
-import static javax.persistence.FetchType.EAGER;
 import static javax.persistence.FetchType.LAZY;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -26,15 +22,14 @@ import org.hibernate.annotations.UpdateTimestamp;
  * @author Dell
  */
 @Entity
-@Table(name = "posts")
-public class Post implements Serializable {
+@Table(name = "comments")
+public class Comment implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
-    private String title;
     private String body;
     
     @CreationTimestamp
@@ -43,26 +38,18 @@ public class Post implements Serializable {
     @UpdateTimestamp
     private Timestamp updated_at;
     
-    @ManyToOne(fetch = EAGER)
+    @ManyToOne(fetch = LAZY)
+    private Post post;
+    
+    @ManyToOne(fetch = LAZY)
     private User user;
-    
-    @OneToMany(fetch = LAZY, cascade = ALL)
-    private List<Comment> comments;
-    
+
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public String getBody() {
@@ -89,20 +76,20 @@ public class Post implements Serializable {
         this.updated_at = updated_at;
     }
 
+    public Post getPost() {
+        return post;
+    }
+
+    public void setPost(Post post) {
+        this.post = post;
+    }
+
     public User getUser() {
         return user;
     }
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    public List<Comment> getComments() {
-        return comments;
-    }
-
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
     }
 
     @Override
@@ -115,10 +102,10 @@ public class Post implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Post)) {
+        if (!(object instanceof Comment)) {
             return false;
         }
-        Post other = (Post) object;
+        Comment other = (Comment) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -127,7 +114,7 @@ public class Post implements Serializable {
 
     @Override
     public String toString() {
-        return "com.reconnect.model.Post[ id=" + id + " ]";
+        return "com.reconnect.model.Comment[ id=" + id + " ]";
     }
     
 }
