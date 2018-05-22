@@ -23,7 +23,7 @@
 	<mvc:annotation-driven />
         
         <!-- Static files (css, js, img, fonts) files located -->
-        <mvc:resources mapping="/resources/**" location="/resources/" />
+        <mvc:resources mapping="/resources/**" location="classpath:assets/" />
 	
 	<!-- View Resolver -->
 	<bean
@@ -56,7 +56,7 @@
 			</props>
 		</property>
                 -->
-		<property name="packagesToScan" value="com.reconnect.models"></property>
+		<property name="packagesToScan" value="com.reconnect.model"></property>
 	</bean>
 
 	<!-- Transaction -->

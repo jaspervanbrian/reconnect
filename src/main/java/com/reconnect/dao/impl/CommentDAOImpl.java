@@ -5,6 +5,7 @@
  */
 package com.reconnect.dao.impl;
 
+import com.reconnect.dao.CommentDAO;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -17,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 @Transactional
-public class CommentDAOImpl {
+public class CommentDAOImpl implements CommentDAO {
     
     @Autowired
     private SessionFactory sessionFactory;
