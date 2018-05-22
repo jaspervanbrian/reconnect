@@ -6,6 +6,7 @@
 package com.reconnect.dao;
 
 import com.reconnect.model.User;
+import java.util.List;
 
 /**
  *
@@ -13,4 +14,6 @@ import com.reconnect.model.User;
  */
 public interface UserDAO {
     public void create(User user);
+
+    public List<User> getUsers();
 }

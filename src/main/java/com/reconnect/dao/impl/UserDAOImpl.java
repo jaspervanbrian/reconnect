@@ -7,6 +7,8 @@ package com.reconnect.dao.impl;
 
 import com.reconnect.dao.UserDAO;
 import com.reconnect.model.User;
+import java.util.List;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,15 @@ public class UserDAOImpl implements UserDAO {
     public void create(User user) {
         Session session = sessionFactory.getCurrentSession();
         session.persist(user);
+    }
+
+    @Override
+    public List<User> getUsers() 
+    {
+        Session session = sessionFactory.getCurrentSession();
+        Criteria criteria = session.createCriteria(User.class);
+        List<User> users = criteria.list();
+        return users;
     }
     
     

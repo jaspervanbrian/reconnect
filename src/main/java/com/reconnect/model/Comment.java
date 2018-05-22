@@ -6,14 +6,17 @@
 package com.reconnect.model;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
+import java.util.Date;
 import javax.persistence.Entity;
 import static javax.persistence.FetchType.LAZY;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -33,10 +36,12 @@ public class Comment implements Serializable {
     private String body;
     
     @CreationTimestamp
-    private Timestamp created_at;
+    @Temporal(value = TemporalType.TIMESTAMP)
+    private Date created_at = new Date();
     
     @UpdateTimestamp
-    private Timestamp updated_at;
+    @Temporal(value = TemporalType.TIMESTAMP)
+    private Date updated_at = new Date();
     
     @ManyToOne(fetch = LAZY)
     private Post post;
@@ -59,21 +64,18 @@ public class Comment implements Serializable {
     public void setBody(String body) {
         this.body = body;
     }
-
-    public Timestamp getCreated_at() {
+    
+    public Date getCreated_at() {
         return created_at;
     }
 
-    public void setCreated_at(Timestamp created_at) {
-        this.created_at = created_at;
-    }
-
-    public Timestamp getUpdated_at() {
+    public Date getUpdated_at() {
         return updated_at;
     }
-
-    public void setUpdated_at(Timestamp updated_at) {
-        this.updated_at = updated_at;
+    
+    @PreUpdate
+    public void setUpdated_at() {
+        this.updated_at = new Date();
     }
 
     public Post getPost() {

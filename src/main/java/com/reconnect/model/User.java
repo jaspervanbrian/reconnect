@@ -6,7 +6,7 @@
 package com.reconnect.model;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 import static javax.persistence.CascadeType.ALL;
 import javax.persistence.Column;
@@ -16,7 +16,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -43,10 +46,12 @@ public class User implements Serializable {
     private String email_address;
     
     @CreationTimestamp
-    private Timestamp created_at;
+    @Temporal(value = TemporalType.TIMESTAMP)
+    private Date created_at = new Date();
     
     @UpdateTimestamp
-    private Timestamp updated_at;
+    @Temporal(value = TemporalType.TIMESTAMP)
+    private Date updated_at = new Date();
     
     @OneToMany(fetch = LAZY, cascade = ALL)
     private List<Post> posts;
@@ -94,22 +99,19 @@ public class User implements Serializable {
         this.email_address = email_address;
     }
 
-    public Timestamp getCreated_at() {
+    public Date getCreated_at() {
         return created_at;
     }
 
-    public void setCreated_at(Timestamp created_at) {
-        this.created_at = created_at;
-    }
-
-    public Timestamp getUpdated_at() {
+    public Date getUpdated_at() {
         return updated_at;
     }
-
-    public void setUpdated_at(Timestamp updated_at) {
-        this.updated_at = updated_at;
+    
+    @PreUpdate
+    public void setUpdated_at() {
+        this.updated_at = new Date();
     }
-
+    
     public List<Post> getPosts() {
         return posts;
     }

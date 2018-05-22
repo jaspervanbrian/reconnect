@@ -8,6 +8,7 @@ package com.reconnect.service.impl;
 import com.reconnect.dao.UserDAO;
 import com.reconnect.model.User;
 import com.reconnect.service.UserService;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,5 +29,11 @@ public class UserServiceImpl implements UserService {
     public void create(User user) 
     {
         userdao.create(user);
+    }
+
+    @Override
+    public List<User> users() 
+    {
+        return userdao.getUsers();
     }
 }
