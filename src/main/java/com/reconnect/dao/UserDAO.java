@@ -16,4 +16,6 @@ public interface UserDAO {
     public void create(User user);
 
     public List<User> getUsers();
+    
+    public List<User> checkDuplicates(String email_address, String username);
 }

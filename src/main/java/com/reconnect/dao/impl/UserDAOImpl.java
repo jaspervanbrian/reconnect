@@ -11,6 +11,9 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.LogicalExpression;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -40,6 +43,20 @@ public class UserDAOImpl implements UserDAO {
         Criteria criteria = session.createCriteria(User.class);
         List<User> users = criteria.list();
         return users;
+    }
+
+    @Override
+    public List<User> checkDuplicates(String email_address, String username) {
+        Session session = sessionFactory.getCurrentSession();
+        Criteria criteria = session.createCriteria(User.class);
+        
+        Criterion duplicate_email_address = Restrictions.eq("email_address", email_address);
+        Criterion duplicate_username = Restrictions.eq("username", username);
+        LogicalExpression or = Restrictions.or(duplicate_email_address, duplicate_username);
+        
+        criteria.add(or);
+        List<User> duplicate_users = criteria.list();
+        return duplicate_users;
     }
     
     

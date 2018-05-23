@@ -35,8 +35,8 @@
                 </div>
 
                 <div class="form-label-group">
-                    <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-                    <label for="inputEmail">Email address</label>
+                    <input type="email" id="inputUsername" class="form-control" placeholder="Username" required autofocus>
+                    <label for="inputUsername">Username</label>
                 </div>
 
                 <div class="form-label-group">
@@ -47,13 +47,20 @@
                 <div class="form-label-group text-center">
                     <a href="#!" data-toggle="modal" data-target="#login_modal">Don't have account yet?</a>
                 </div>
-                    
+
                 <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
                 <p class="mt-5 mb-3 text-muted text-center">&copy; 2017-2018</p>
             </div>
         </form>
-        <jsp:include page="partials/login-modal.jsp"></jsp:include>
-        
+        <jsp:include page="partials/login-modal.jsp">
+            <jsp:param name="username" value="${username}"></jsp:param>
+            <jsp:param name="email_address" value="${email_address}"></jsp:param>
+            <jsp:param name="old_email_address" value="${old_email_address}"></jsp:param>
+            <jsp:param name="old_username" value="${old_username}"></jsp:param>
+            <jsp:param name="old_first_name" value="${old_first_name}"></jsp:param>
+            <jsp:param name="old_last_name" value="${old_last_name}"></jsp:param>
+        </jsp:include>
+
         <!-- Bootstrap core JavaScript
         ================================================== -->
         <!-- Placed at the end of the document so the pages load faster -->
@@ -72,5 +79,16 @@
                 text: 'Thumbnail'
             });
         </script>
+        <%
+            if ((request.getAttribute("username") != null) || (request.getAttribute("email_address") != null)) {
+        %>
+                <script>
+                    $(document).ready(function() {
+                       $("#login_modal").modal("show");
+                    });
+                </script>
+        <%
+            }
+        %>
     </body>
 </html>

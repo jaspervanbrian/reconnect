@@ -6,6 +6,7 @@
 package com.reconnect.service;
 
 import com.reconnect.model.User;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,4 +17,6 @@ public interface UserService {
     public void create(User user);
     
     public List<User> users();
+    
+    public ArrayList<String> checkDuplicates(String email_address, String username);
 }
