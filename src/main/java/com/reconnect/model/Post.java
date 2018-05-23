@@ -15,6 +15,7 @@ import static javax.persistence.FetchType.LAZY;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.PreUpdate;
@@ -51,7 +52,7 @@ public class Post implements Serializable {
     @ManyToOne(fetch = EAGER)
     private User user;
     
-    @OneToMany(fetch = LAZY, cascade = ALL)
+    @OneToMany(fetch = LAZY, cascade = ALL, mappedBy = "post")
     private List<Comment> comments;
     
     public Long getId() {

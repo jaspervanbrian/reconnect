@@ -53,10 +53,10 @@ public class User implements Serializable {
     @Temporal(value = TemporalType.TIMESTAMP)
     private Date updated_at = new Date();
     
-    @OneToMany(fetch = LAZY, cascade = ALL)
+    @OneToMany(fetch = LAZY, cascade = ALL, mappedBy = "user")
     private List<Post> posts;
     
-    @OneToMany(fetch = LAZY, cascade = ALL)
+    @OneToMany(fetch = LAZY, cascade = ALL, mappedBy = "user")
     private List<Comment> comments;
     
     public Long getId() {
