@@ -6,6 +6,7 @@
 package com.reconnect.dao;
 
 import com.reconnect.model.Post;
+import java.util.List;
 
 /**
  *
@@ -13,4 +14,8 @@ import com.reconnect.model.Post;
  */
 public interface PostDAO {
     public void create(Post post);
+
+    public List<Post> getPosts();
+
+    public Post getPost(String id);
 }

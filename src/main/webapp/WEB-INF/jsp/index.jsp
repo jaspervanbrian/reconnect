@@ -32,24 +32,27 @@
                 <div class="text-center mb-4">
                     <img class="mb-4" src="${icon}" alt="" height="100">
                     <h1 class="h3 mb-3 font-weight-normal">Blogs that really matters.</h1>
-                    <p><strong>Join ReConnect now to express ideas and feelings, with the people you care about.</strong></p>
+                    <p>Join ReConnect now to express ideas and feelings, with the people you care about.</p>
                 </div>
 
                 <div class="form-label-group">
-                    <input type="text" id="inputUsername" name="username" class="form-control" placeholder="Username" required autofocus>
+                    <input type="text" id="inputUsername" name="username" class="form-control ${error.equals("Login credentials is invalid.") ? 'is-invalid' : ''}" placeholder="Username" required autofocus>
                     <label for="inputUsername">Username</label>
                 </div>
 
                 <div class="form-label-group">
-                    <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required>
+                    <input type="password" id="inputPassword" name="password" class="form-control ${error.equals("Login credentials is invalid.") ? 'is-invalid' : ''}" placeholder="Password" required>
                     <label for="inputPassword">Password</label>
+                    <span class="${error.equals("Login credentials is invalid.") ? 'form-text text-danger' : ''}">
+                        ${error.equals("Login credentials is invalid.") ? 'Login credentials is invalid.' : ''}
+                    </span>
                 </div>
 
                 <div class="form-label-group text-center">
-                    <a href="#!" data-toggle="modal" data-target="#login_modal">Don't have account yet?</a>
+                    <a href="#!" data-toggle="modal" data-target="#login_modal">Don't have account yet? Sign up here.</a>
                 </div>
 
-                <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+                <button class="btn btn-lg btn-dark btn-block" type="submit">Sign in</button>
                 <p class="mt-5 mb-3 text-muted text-center">&copy; 2017-2018</p>
             </div>
         </form>
@@ -61,7 +64,11 @@
             <jsp:param name="old_first_name" value="${old_first_name}"></jsp:param>
             <jsp:param name="old_last_name" value="${old_last_name}"></jsp:param>
         </jsp:include>
-
+                    
+        <div id="flash-message" class="alert alert-success" role="alert">
+            <h5 style="display: inline; float: right;"><strong>${success}</strong></h5>
+        </div>
+                    
         <!-- Bootstrap core JavaScript
         ================================================== -->
         <!-- Placed at the end of the document so the pages load faster -->
@@ -88,6 +95,12 @@
                        $("#login_modal").modal("show");
                     });
                 </script>
+        <%
+            }
+            if ((request.getAttribute("success") != null)) {
+        %>
+                <spring:url value="/resources/js/flashMessage.js" var="flash" />
+                <script src="${flash}"></script>
         <%
             }
         %>

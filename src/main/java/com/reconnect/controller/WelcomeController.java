@@ -22,7 +22,7 @@ public class WelcomeController {
     @PreAuthorize("hasRole('ROLE_ANONYMOUS')")
     @RequestMapping(value="/")
     public ModelAndView login(
-            @RequestParam(value = "error", required = false) String error
+        @RequestParam(value = "error", required = false) String error
     )
     {
         ModelAndView model = new ModelAndView("index");

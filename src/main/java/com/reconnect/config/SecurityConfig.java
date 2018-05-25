@@ -66,6 +66,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .usernameParameter("username")
                 .passwordParameter("password")
                 .and().logout().logoutUrl("/j_spring_security_logout").logoutSuccessUrl("/");
+        http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/home");
 
     }
 }

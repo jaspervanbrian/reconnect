@@ -128,3 +128,18 @@ h1, h2, h3, h4, h5, h6 {
 .blog-footer p:last-child {
   margin-bottom: 0;
 }
+
+#banner {
+    background: url("../images/banner.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+#flash-message {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 900;
+}

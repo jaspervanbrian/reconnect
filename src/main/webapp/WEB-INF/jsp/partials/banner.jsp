@@ -5,19 +5,16 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
-<div class="jumbotron p-3 p-md-5 text-white rounded bg-dark">
+<div class="jumbotron p-3 p-md-5 text-white rounded bg-dark" id="banner">
     <div class="row">
         <div class="col-6 px-0">
             <h1 class="display-4 font-italic">ReConnect with your friends.</h1>
             <p class="lead my-3">Discover more people worth reconnecting with by making content through microblogging.</p>
-            <p class="lead mb-0"><button class="btn btn-outline-light">Post now!</button></p>
-        </div>
-        <div class="col-6">
-            <spring:url value="/resources//blog.css" var="banner_photo" />
-            <img src="" alt="">
+            <p class="lead mb-0"><a href="<c:url value='/posts/create' />" class="btn btn-outline-light">Post now!</a></p>
         </div>
     </div>
 </div>

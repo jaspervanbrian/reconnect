@@ -17,7 +17,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="${pageContext.request.contextPath}/register" method="post">
+                <form action="${pageContext.request.contextPath}/" method="post">
                     <div class="container">
                         <div class="row">
                             <div class="col-6">

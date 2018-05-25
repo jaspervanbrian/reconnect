@@ -30,7 +30,7 @@ public class UserController {
     @Autowired
     private UserService userService;
     
-    @RequestMapping(value = "/register", method = POST)
+    @RequestMapping(value = "/", method = POST)
     public ModelAndView register(
         @RequestParam("first_name") String first_name,
         @RequestParam("last_name") String last_name,
@@ -63,15 +63,8 @@ public class UserController {
         user.setRole_name("ROLE_USER");
         userService.create(user);
         
-        mv.addObject("success", "success");
+        mv.addObject("success", "You have successfully registered!");
         
         return mv;
-    }
-    
-    @RequestMapping(value = "/users", method = GET)
-    @ResponseBody
-    public List<User> index()
-    {
-        return userService.users();
     }
 }
