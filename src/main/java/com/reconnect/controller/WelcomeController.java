@@ -5,8 +5,11 @@
  */
 package com.reconnect.controller;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  *
@@ -16,9 +19,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class WelcomeController {
     
+    @PreAuthorize("hasRole('ROLE_ANONYMOUS')")
     @RequestMapping(value="/")
-    public String showIndex()
+    public ModelAndView login(
+            @RequestParam(value = "error", required = false) String error
+    )
     {
-        return "index";
+        ModelAndView model = new ModelAndView("index");
+        if(error != null) {
+            model.addObject("error", "Login credentials is invalid.");
+        }
+        return model;
     }
 }

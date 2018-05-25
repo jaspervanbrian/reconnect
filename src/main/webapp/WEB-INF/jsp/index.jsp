@@ -5,7 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html lang="en">
     <head>
@@ -26,21 +27,21 @@
     </head>
 
     <body>
-        <form class="form-signin">
+        <form class="form-signin" method="POST" action="<c:url value='/j_spring_security_check' />">
             <div class="jumbotron" id="login-details">
                 <div class="text-center mb-4">
                     <img class="mb-4" src="${icon}" alt="" height="100">
-                    <h1 class="h3 mb-3 font-weight-normal">Welcome to ReConnect.</h1>
-                    <p><strong>Discover more people worth reconnecting with.</strong></p>
+                    <h1 class="h3 mb-3 font-weight-normal">Blogs that really matters.</h1>
+                    <p><strong>Join ReConnect now to express ideas and feelings, with the people you care about.</strong></p>
                 </div>
 
                 <div class="form-label-group">
-                    <input type="email" id="inputUsername" class="form-control" placeholder="Username" required autofocus>
+                    <input type="text" id="inputUsername" name="username" class="form-control" placeholder="Username" required autofocus>
                     <label for="inputUsername">Username</label>
                 </div>
 
                 <div class="form-label-group">
-                    <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                    <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required>
                     <label for="inputPassword">Password</label>
                 </div>
 
@@ -52,7 +53,7 @@
                 <p class="mt-5 mb-3 text-muted text-center">&copy; 2017-2018</p>
             </div>
         </form>
-        <jsp:include page="partials/login-modal.jsp">
+        <jsp:include page="partials/register-modal.jsp">
             <jsp:param name="username" value="${username}"></jsp:param>
             <jsp:param name="email_address" value="${email_address}"></jsp:param>
             <jsp:param name="old_email_address" value="${old_email_address}"></jsp:param>

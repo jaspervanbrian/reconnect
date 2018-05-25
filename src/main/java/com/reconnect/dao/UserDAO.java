@@ -18,4 +18,6 @@ public interface UserDAO {
     public List<User> getUsers();
     
     public List<User> checkDuplicates(String email_address, String username);
+    
+    public User findByUsername(String username);
 }

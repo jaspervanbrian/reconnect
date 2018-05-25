@@ -47,6 +47,8 @@ public class User implements Serializable {
     
     private String password;
     
+    private String role_name;
+    
     @CreationTimestamp
     @Temporal(value = TemporalType.TIMESTAMP)
     private Date created_at = new Date();
@@ -107,6 +109,14 @@ public class User implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getRole_name() {
+        return role_name;
+    }
+
+    public void setRole_name(String role_name) {
+        this.role_name = role_name;
     }
 
     public Date getCreated_at() {

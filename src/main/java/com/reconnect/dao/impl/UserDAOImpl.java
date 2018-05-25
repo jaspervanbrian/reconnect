@@ -58,6 +58,21 @@ public class UserDAOImpl implements UserDAO {
         List<User> duplicate_users = criteria.list();
         return duplicate_users;
     }
+
+    @Override
+    public User findByUsername(String username) {
+        Session session = sessionFactory.getCurrentSession();
+        Criteria criteria = session.createCriteria(User.class);
+        
+        criteria.add(Restrictions.eq("username", username));
+        List<User> users = criteria.list();
+        if(users.size() > 0) {
+            for(User user : users) {
+                return user;
+            }
+        }
+        return null;
+    }
     
     
 }

@@ -39,9 +39,9 @@ public class UserController {
         @RequestParam("password") String password
     )
     {
+        ModelAndView mv = new ModelAndView("index");
         ArrayList<String> duplicates = userService.checkDuplicates(email_address, username);
         if(duplicates.size() > 0) {
-            ModelAndView mv = new ModelAndView("index");
             if(duplicates.contains("username")) {
                 mv.addObject("username", "error");
             }
@@ -60,9 +60,11 @@ public class UserController {
         user.setEmail_address(email_address);
         user.setUsername(username);
         user.setPassword(password);
+        user.setRole_name("ROLE_USER");
         userService.create(user);
         
-        ModelAndView mv = new ModelAndView("layouts/app");
+        mv.addObject("success", "success");
+        
         return mv;
     }
     

@@ -5,14 +5,19 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 
 <div class="jumbotron p-3 p-md-5 text-white rounded bg-dark">
     <div class="row">
         <div class="col-6 px-0">
-            <h1 class="display-4 font-italic">Title of a longer featured blog post</h1>
-            <p class="lead my-3">Multiple lines of text that form the lede, informing new readers quickly and efficiently about what's most interesting in this post's contents.</p>
-            <p class="lead mb-0"><a href="#" class="text-white font-weight-bold">Continue reading...</a></p>
+            <h1 class="display-4 font-italic">ReConnect with your friends.</h1>
+            <p class="lead my-3">Discover more people worth reconnecting with by making content through microblogging.</p>
+            <p class="lead mb-0"><button class="btn btn-outline-light">Post now!</button></p>
+        </div>
+        <div class="col-6">
+            <spring:url value="/resources//blog.css" var="banner_photo" />
+            <img src="" alt="">
         </div>
     </div>
 </div>
